@@ -1,0 +1,9 @@
+progetti:
+  - titolo: "Progetto A"
+    descrizione: "Descrizione dettagliata del Progetto A."
+    data: "2024-12-01"
+    link: "https://esempio.com/progetto-a"
+  - titolo: "Progetto B"
+    descrizione: "Descrizione dettagliata del Progetto B."
+    data: "2025-01-02"
+    link: "https://esempio.com/progetto-b"
