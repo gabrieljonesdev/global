@@ -106,3 +106,56 @@
       <div class="ball4 ball"></div>  
     </div>
   </div>
+  <script>
+    function fromEntries(entries){
+      var res = {};
+      for(var i = 0; i < entries.length; i++) res[entries[i][0]] = entries[i][1];
+      return res;
+    }
+    if(!Object.fromEntries) Object.fromEntries = fromEntries;
+    if (!Object.entries)
+    Object.entries = function( obj ){
+      var ownProps = Object.keys( obj ),
+          i = ownProps.length,
+          resArray = new Array(i); // preallocate the Array
+      while (i--)
+        resArray[i] = [ownProps[i], obj[ownProps[i]]];
+
+      return resArray;
+    };
+    if(!Array.prototype.includes){
+      //or use Object.defineProperty
+      Array.prototype.includes = function(search){
+        return !!~this.indexOf(search);
+      }
+    }
+    if(!Array.prototype.indexOf){
+    Array.prototype.indexOf = (function(Object, max, min){
+      return function indexOf(member, fromIndex) {
+        if(this===null||this===undefined)throw TypeError("Array.prototype.indexOf called on null or undefined");
+        var that = Object(this), Len = that.length >>> 0, i = min(fromIndex | 0, Len);
+        if (i < 0) i = max(0, Len+i); else if (i >= Len) return -1;
+
+        if(member===void 0){ for(; i !== Len; ++i) if(that[i]===void 0 && i in that) return i; // undefined
+        }else if(member !== member){   for(; i !== Len; ++i) if(that[i] !== that[i]) return i; // NaN
+        }else                           for(; i !== Len; ++i) if(that[i] === member) return i; // all else
+
+        return -1; // if the value was not found, then return -1
+      };
+    })(Object, Math.max, Math.min);
+    }
+
+    if (window.location.href.indexOf("index.php") > -1) {//se contiene index.php rimando alla home
+      console.log(window.location.origin)
+      if(window.location.href!=window.location.origin){
+        window.location.href = window.location.origin
+      }
+    }
+    if(window.navigator && navigator.serviceWorker) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+          registration.unregister()
+        }
+      })
+    }
+  </script>
