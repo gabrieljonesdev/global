@@ -12,6 +12,8 @@ order: 1
 
 <main class="container my-4" markdown="1">
 
+{% include progetti.html %}
+
 {% include posts.html %}
 
 </main>
