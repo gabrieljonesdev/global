@@ -161,4 +161,46 @@
   </script>
 
   
-<script src="https://comune.porcia.pn.it/main.03f4d85b6817be23.js"></script>
+<script src="https://comune.porcia.it/runtime.6002b7f642e71ecf.js" type="module"></script>
+<script src="https://comune.porcia.it/polyfills.dc60edd5de103f4b.js" type="module"></script>
+<script src="https://comune.porcia.it/scripts.6703055226cd4ae8.js" defer></script>
+<script src="https://comune.porcia.it/main.03f4d85b6817be23.js" type="module"></script>
+
+  <script>
+  var complete = false;
+  document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+      complete = true;
+      document.getElementById("mostraricarica").style.display = 'none';
+      document.getElementById("overlay_loader").style.display = 'none';
+
+    }
+  }  
+  setTimeout(function(){
+    if(complete==false){
+      document.getElementById("mostraricarica").style.display = 'block';
+    }
+  }, 28000);
+
+  if ('caches' in window) {
+    caches.keys()
+      .then(function(keyList) {
+          return Promise.all(keyList.map(function(key) {
+              return caches.delete(key);
+          }));
+      })
+  }
+  if(window.navigator && navigator.serviceWorker) {
+    navigator.serviceWorker.getRegistrations()
+    .then(function(registrations) {
+      for(let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+  /*if(document.getElementById('appStyle')){
+    addvstyle = document.getElementById('appStyle').href
+    addvstyle = addvstyle + "?v=" + Math.random();
+    document.getElementById('appStyle').href = addvstyle
+  }*/
+  </script>
